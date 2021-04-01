@@ -13,26 +13,26 @@ spec:
         app: flights-api
     spec:
       containers:
-        - image: "{{.Values.deploy.acrServer}}/hackfest/flights-api:{{.Values.deploy.imageTag}}"
+        - image: "{{.Values.deploy.acrServer}}/leo/flights-api:{{.Values.deploy.imageTag}}"
           imagePullPolicy: Always
           name: flights-api
           resources:
             requests:
-              memory: "64Mi"
+              memory: "256Mi"
               cpu: "100m"
             limits:
-              memory: "128Mi"
+              memory: "512Mi"
               cpu: "500m"
           env:
             - name: APPINSIGHTS_INSTRUMENTATIONKEY
               valueFrom:
                 secretKeyRef:
-                  name: cosmos-db-secret
+                  name: db-secret
                   key: appinsights
             - name: DATA_SERVICE_URI
-              value: http://data-api.hackfest.svc.cluster.local:3009/
+              value: http://data-api.{{.Values.environment}}.svc.cluster.local:3009/
             - name: CACHE_SERVICE_URI
-              value: http://cache-api.hackfest.svc.cluster.local:3006/       
+              value: http://cache-api.{{.Values.environment}}.svc.cluster.local:3006/       
           ports:
           - containerPort: {{.Values.deploy.containerPort}}
             protocol: TCP

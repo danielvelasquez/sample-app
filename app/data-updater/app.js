@@ -39,7 +39,7 @@ var mongoPrefix = "mongodb://"
 var user = process.env.MONGODB_USER
 var password = process.env.MONGODB_PASSWORD
 
-var cosmosConnectString = mongoPrefix.concat(user,`:`,password,`@`,user,`.documents.azure.com:10255/hackfest?ssl=true`)
+var cosmosConnectString = mongoPrefix.concat(user,`:`,password,`@`,user,`.mongo.cosmos.azure.com:10255/?ssl=true`)
 
 mongoose.connect(
     cosmosConnectString,

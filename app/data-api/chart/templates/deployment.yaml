@@ -13,7 +13,7 @@ spec:
         app: data-api
     spec:
       containers:
-        - image: "{{.Values.deploy.acrServer}}/hackfest/data-api:{{.Values.deploy.imageTag}}"
+        - image: "{{.Values.deploy.acrServer}}/leo/data-api:{{.Values.deploy.imageTag}}"
           imagePullPolicy: Always
           name: data-api
           resources:
@@ -27,17 +27,17 @@ spec:
             - name: MONGODB_USER
               valueFrom:
                 secretKeyRef:
-                  name: cosmos-db-secret
+                  name: db-secret
                   key: user
             - name: MONGODB_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: cosmos-db-secret
+                  name: db-secret
                   key: pwd
             - name: APPINSIGHTS_INSTRUMENTATIONKEY
               valueFrom:
                 secretKeyRef:
-                  name: cosmos-db-secret
+                  name: db-secret
                   key: appinsights                   
           ports:
           - containerPort: {{.Values.deploy.containerPort}}
